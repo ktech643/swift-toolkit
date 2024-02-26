@@ -5,7 +5,6 @@
 //
 
 import Combine
-import Kingfisher
 import MobileCoreServices
 import R2Navigator
 import R2Shared
