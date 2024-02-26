@@ -39,7 +39,6 @@ final class ReaderModule: ReaderModuleAPI {
         self.highlights = highlights
 
         formatModules = [
-            AudiobookModule(delegate: self),
             CBZModule(delegate: self),
             EPUBModule(delegate: self),
             PDFModule(delegate: self),

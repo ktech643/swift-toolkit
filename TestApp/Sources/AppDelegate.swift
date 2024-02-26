@@ -28,20 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Library
         let libraryViewController = app.library.rootViewController
         libraryViewController.tabBarItem = makeItem(title: "bookshelf_tab", image: "bookshelf")
-
-        // OPDS Feeds
-        let opdsViewController = app.opds.rootViewController
-        opdsViewController.tabBarItem = makeItem(title: "catalogs_tab", image: "catalogs")
-
-        // About
-        let aboutViewController = app.aboutViewController
-        aboutViewController.tabBarItem = makeItem(title: "about_tab", image: "about")
-
+        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             libraryViewController,
-            opdsViewController,
-            aboutViewController,
         ]
 
         window = UIWindow(frame: UIScreen.main.bounds)

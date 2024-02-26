@@ -128,12 +128,7 @@ struct UserPreferences<
                         )
                     }
 
-                case let editor as AudioPreferencesEditor:
-                    audioUserPreferences(
-                        commit: commit,
-                        volume: editor.volume,
-                        speed: editor.speed
-                    )
+                
 
                 default:
                     Text("No user preferences available.")

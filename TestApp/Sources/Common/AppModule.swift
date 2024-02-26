@@ -24,7 +24,6 @@ final class AppModule {
     // App modules
     var library: LibraryModuleAPI!
     var reader: ReaderModuleAPI!
-    var opds: OPDSModuleAPI!
 
     init() throws {
         let httpClient = DefaultHTTPClient()
@@ -35,17 +34,10 @@ final class AppModule {
 
         library = LibraryModule(delegate: self, books: books, httpClient: httpClient)
         reader = ReaderModule(delegate: self, books: books, bookmarks: bookmarks, highlights: highlights)
-        opds = OPDSModule(delegate: self)
 
         // Set Readium 2's logging minimum level.
         R2EnableLog(withMinimumSeverityLevel: .debug)
     }
-
-    private(set) lazy var aboutViewController: UIViewController = {
-        let storyboard = UIStoryboard(name: "App", bundle: nil)
-        let aboutViewController = storyboard.instantiateViewController(withIdentifier: "AboutTableViewController") as! AboutTableViewController
-        return UINavigationController(rootViewController: aboutViewController)
-    }()
 }
 
 extension AppModule: ModuleDelegate {
@@ -76,13 +68,3 @@ extension AppModule: LibraryModuleDelegate {
 }
 
 extension AppModule: ReaderModuleDelegate {}
-
-extension AppModule: OPDSModuleDelegate {
-    func opdsDownloadPublication(_ publication: Publication?, at link: Link, sender: UIViewController) async throws -> Book {
-        guard let url = link.url(relativeTo: publication?.baseURL) else {
-            throw LibraryError.cancelled
-        }
-
-        return try await library.importPublication(from: url, sender: sender)
-    }
-}
